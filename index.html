@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ი︵𐑼 </title>
+  <!-- ملف التنسيق الخاص بنا -->
+  <link rel="stylesheet" href="style.css">
+  <!-- مكتبة التقويم الإنجليزي Flatpickr لمنع العربي المقلوب -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+
+  <div id="app">
+    
+    <!-- 1. شاشة تسجيل الدخول -->
+    <div id="auth-container" class="card hidden">
+      <h2>Welcome ♯ </h2>
+      <p class="subtitle">Log in or create an account to start tracking</p>
+
+      <form id="auth-form">
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="example@email.com" required>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required minlength="6">
+        </div>
+
+        <p id="auth-message" class="message"></p>
+
+        <div class="buttons-row">
+          <button type="button" id="login-btn">Log In</button>
+          <button type="button" id="signup-btn" class="secondary-btn">Sign Up</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- 2. شاشة التطبيق الرئيسية (Dashboard) -->
+    <div id="dashboard" class="card">
+      <div class="dashboard-header">
+        <h2>Ი︵𐑼 </h2>
+        <div class="header-actions">
+          <button id="notify-btn" class="icon-btn" title="Enable Notifications">🔔</button>
+          <button id="logout-btn" class="logout-link">Log Out</button>
+        </div>
+      </div>
+
+      <!-- بطاقة التنبؤ الذكية -->
+      <div id="prediction-card" class="prediction-card">
+        <div class="prediction-days" id="countdown-days">--</div>
+        <div class="prediction-label" id="countdown-label">Days until next cycle</div>
+        <div class="prediction-sub" id="expected-date">Expected: Loading...</div>
+      </div>
+
+      <!-- تنبيه حقيبة الطوارئ -->
+      <div id="emergency-banner" class="emergency-banner hidden">
+        👛 <strong>Emergencybag Reminder:</strong> Your Period is very close! Check your bag essentials below.
+      </div>
+
+      <!-- نموذج تسجيل دورة جديدة -->
+      <form id="cycle-form">
+        <div class="input-group">
+          <label for="start-date">Period Start Date</label>
+          <!-- حقل التاريخ الإنجليزي الجديد -->
+          <input type="text" id="start-date" placeholder="Select Date (YYYY / DD / MM)" required readonly>
+        </div>
+
+        <!-- اختيار الأعراض + شعور مخصص -->
+        <div class="input-group">
+          <label>How are you feeling today?</label>
+          <div class="symptoms-grid">
+            <label class="symptom-tag">
+              <input type="checkbox" name="symptom" value="Cramps"> Cramps
+            </label>
+            <label class="symptom-tag">
+              <input type="checkbox" name="symptom" value="Headache"> Headache
+            </label>
+            <label class="symptom-tag">
+              <input type="checkbox" name="symptom" value="Mood swings"> Mood swings
+            </label>
+            <label class="symptom-tag">
+              <input type="checkbox" name="symptom" value="Fatigue"> Fatigue
+            </label>
+          </div>
+          <input type="text" id="custom-symptom" placeholder="Other feelings (e.g. lower back pain, nausea)..." style="margin-top: 5px;">
+        </div>
+
+        <!-- الملاحظات الشخصية -->
+        <div class="input-group">
+          <label for="notes">Notes / Thoughts</label>
+          <textarea id="notes" rows="2" placeholder="Write anything you want..."></textarea>
+        </div>
+
+        <!-- قسم حقيبة الطوارئ -->
+        <div class="input-group emergency-box">
+          <label>👛 Emergencybag Checklist</label>
+          <div class="symptoms-grid">
+            <label class="symptom-tag">
+              <input type="checkbox" name="bag-item" value="Pads / Tampons" checked> Pads / Tampons
+            </label>
+            <label class="symptom-tag">
+              <input type="checkbox" name="bag-item" value="Painkillers" checked> Painkillers
+            </label>
+            <label class="symptom-tag">
+              <input type="checkbox" name="bag-item" value="Wipes "> Wipes 
+            </label>
+            <label class="symptom-tag">
+              <input type="checkbox" name="bag-item" value="Spare underwear"> Spare underwear
+            </label>
+          </div>
+          <input type="text" id="custom-bag-items" placeholder="Personal bag items (e.g. heating pad, chocolate)..." style="margin-top: 5px;">
+        </div>
+
+        <button type="submit" id="save-cycle-btn">Save Entry</button>
+        <p id="cycle-message" class="message"></p>
+      </form>
+
+      <!-- سجل الدورات السابقة -->
+      <div class="history-section">
+        <h3>Previous Cycles</h3>
+        <ul id="history-list" class="history-list">
+          <li class="empty-state">Loading entries...</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- مكتبة Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- مكتبة التقويم Flatpickr -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <!-- ملف الجافاسكريبت الخاص بنا -->
+  <script src="app.js"></script>
+</body>
+</html>

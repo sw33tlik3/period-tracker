@@ -1,0 +1,345 @@
+/* 1. إعدادات عامة للخطوط والصفحة (Reset & Base styles) */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f7f2e7; /* اللون العاجي الدافئ */
+  color: #4a4a4a;
+}
+
+/* الحاوية الرئيسية للتطبيق (Main container) */
+#app {
+  width: 100%;
+  max-width: 440px;
+  padding: 20px;
+}
+
+/* شكل البطاقة البيضاء (Card UI) */
+.card {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(122, 28, 41, 0.08);
+  text-align: center;
+}
+
+h2 {
+  margin-top: 0;
+  color: #3b0910;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 25px;
+}
+
+/* حقول الإدخال (Input Groups) */
+.input-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.input-group input[type="email"],
+.input-group input[type="password"],
+.input-group input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e0d5d5;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  background-color: #faf8f5;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus,
+textarea:focus {
+  border-color: #7a1c29;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dcd3cb;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background-color: #faf8f5;
+  outline: none;
+}
+
+/* الأزرار (Buttons) */
+.buttons-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #7a1c29; /* الأحمر النبيذي */
+  color: white;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+button:hover {
+  background-color: #5c141e;
+}
+
+.secondary-btn {
+  background-color: #eee7de;
+  color: #4a4a4a;
+}
+
+.secondary-btn:hover {
+  background-color: #e0d7cc;
+}
+
+.message {
+  font-size: 0.85rem;
+  min-height: 1.2rem;
+  margin: 10px 0;
+}
+
+/* ========================================= */
+/* 2. شاشة الـ Dashboard                     */
+/* ========================================= */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 4px;
+  width: auto;
+  transition: transform 0.2s;
+}
+
+.icon-btn:hover {
+  transform: scale(1.15);
+  background: none;
+}
+
+.logout-link {
+  background: none;
+  border: none;
+  color: #9c8e89;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+  width: auto;
+  text-decoration: underline;
+}
+
+.logout-link:hover {
+  color: #7a1c29;
+  background: none;
+}
+
+/* بطاقة التنبؤ (Prediction Card) */
+.prediction-card {
+  background: linear-gradient(135deg, #7a1c29, #4a0d16);
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 25px;
+  box-shadow: 0 6px 18px rgba(122, 28, 41, 0.25);
+}
+
+.prediction-days {
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+  color: #f7f2e7;
+}
+
+.prediction-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.prediction-sub {
+  font-size: 0.85rem;
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+/* تنبيه حقيبة الطوارئ (Emergency Banner) */
+.emergency-banner {
+  background-color: #ffebee;
+  border-left: 4px solid #b71c1c;
+  color: #7f0000;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+  text-align: left;
+  line-height: 1.4;
+}
+
+/* شبكة الأعراض وحقيبة الطوارئ */
+.symptoms-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.symptom-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f7f1eb;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+
+.symptom-tag:hover {
+  background-color: #ede2d8;
+}
+
+.symptom-tag input[type="checkbox"] {
+  accent-color: #7a1c29;
+}
+
+.emergency-box {
+  background-color: #faf5ee;
+  border: 1px dashed #dcd3cb;
+  padding: 14px;
+  border-radius: 12px;
+}
+
+/* السجلات السابقة وزر الحذف */
+.history-section {
+  margin-top: 25px;
+  text-align: left;
+  border-top: 1px solid #f0e6de;
+  padding-top: 15px;
+}
+
+.history-section h3 {
+  font-size: 0.95rem;
+  color: #554846;
+  margin-bottom: 10px;
+}
+
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.history-item {
+  background-color: #faf6f2;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border-left: 4px solid #7a1c29;
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.history-item-content {
+  flex: 1;
+}
+
+.history-item .date {
+  font-weight: bold;
+  color: #3b0910;
+}
+
+.delete-cycle-btn {
+  background: none;
+  border: none;
+  color: #b09f98;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  width: auto;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.delete-cycle-btn:hover {
+  background-color: #f7e6e8;
+  color: #900c1e;
+}
+
+.empty-state {
+  color: #a09590;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 10px;
+}
+
+/* تخصيص تقويم Flatpickr بالأحمر الداكن */
+.flatpickr-day.selected, 
+.flatpickr-day.selected:hover {
+  background: #7a1c29 !important;
+  border-color: #7a1c29 !important;
+}
+
+.flatpickr-day:hover {
+  background: #f7e6e8 !important;
+}
+
+.flatpickr-calendar {
+  border-radius: 14px !important;
+  box-shadow: 0 10px 25px rgba(122, 28, 41, 0.15) !important;
+  background: #faf8f5 !important;
+}
+
+/* كلاس الإخفاء في الأخير دائماً */
+.hidden {
+  display: none !important;
+}
