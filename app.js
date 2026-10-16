@@ -59,13 +59,13 @@ function formatYearDayMonth(dateInput) {
   return `${year} / ${day} / ${month}`;
 }
 
-// دالة إظهار الرسائل
+// دالة إظهار الرسائل الملونة
 function showMessage(element, text, isError = false) {
   element.textContent = text;
   element.style.color = isError ? "#b71c1c" : "#2e7d32";
 }
 
-// دالة تحديث حالة الواجهة
+// دالة تحديث حالة الواجهة (تتحكم في إظهار وإخفاء الشاشات)
 function updateUI(user) {
   currentUser = user;
   if (user) {
@@ -130,11 +130,6 @@ logoutBtn.addEventListener("click", async () => {
   updateUI(null);
   showMessage(authMessage, "You have logged out.");
 });
-
-async function checkCurrentSession() {
-  const { data: { session } } = await supabaseClient.auth.getSession();
-  if (session) updateUI(session.user);
-}
 
 // ==========================================
 // 5. إدارة وحفظ حقيبة الطوارئ (Emergency Bag)
@@ -399,12 +394,32 @@ window.deleteCycleEntry = async function (cycleId) {
 // 9. تفعيل التقويم الأنيق Flatpickr
 // ==========================================
 flatpickr("#start-date", {
-  dateFormat: "Y-m-d",          // يحفظ في قاعدة البيانات بصيغة صحيحة
-  altInput: true,               // ينشئ مربع عرض إنجليزي أنيق
-  altFormat: "Y / d / m",       // يظهر للمستخدمة بصيغة: سنة / يوم / شهر
-  maxDate: "today",             // يمنع اختيار تواريخ مستقبلية
-  disableMobile: "true"         // تطبيق نفس الشكل الإنجليزي حتى على الهواتف
+  dateFormat: "Y-m-d",
+  altInput: true,
+  altFormat: "Y / d / m",
+  maxDate: "today",
+  disableMobile: "true"
 });
 
-// بدء فحص الجلسة
+// ==========================================
+// 10. فحص الجلسة الذكي (Fix: يظهر صفحة الدخول للزوار الجدد)
+// ==========================================
+async function checkCurrentSession() {
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if (session) {
+    updateUI(session.user);
+  } else {
+    updateUI(null); // يضمن ظهور صفحة الدخول تلقائياً
+  }
+}
+
+// الاستماع لأي تغيير في حالة الحساب (تسجيل دخول أو خروج)
+supabaseClient.auth.onAuthStateChange((event, session) => {
+  if (session) {
+    updateUI(session.user);
+  } else {
+    updateUI(null);
+  }
+});
+
 checkCurrentSession();
